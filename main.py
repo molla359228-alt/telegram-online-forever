@@ -8,8 +8,8 @@ from telethon.sessions import StringSession
 api_id = int(os.environ.get("TELEGRAM_API_ID", 30291759))
 api_hash = os.environ.get("TELEGRAM_API_HASH", '07069b307a8e6726b2a1dbf8f0682d46')
 
-# আপনার নতুন সেশন স্ট্রিং সরাসরি এখানে বসানো হলো
-session_str = "1BQANOTEuMTA4LjU2LjEzMAG7mmc1nSTAm5J9oc0w9XVc5lJozgo6hy7/v8AWkK3uP3QuEagx+7Wg9ol9Y9JFdZllHx5wsFaMBThRI/02dkIBRTFVyrraqMrhEBgzwwgeohoCba4ci3pE5JDHdbGIas/gs/rvt0TLydcqQ5QOz4lU+6pQcrWkDnfg3FIWEDNd5fNSMKgOrnwZOrq35WNah1QVQ6+dp6VG4xcxWKBi9HyH/F6fHr+pF+UveUAxEyl8O4Rxqh1m1BjaF3VQjEhgtrRDpY246uwsBIuet97R2Isxbfd2nF3CyZw771R1WtKvQryuEroi3wRDSqttyC6Zt17JsIAQkJpgfr0I+8oFShaTFg=="
+# আপনার নতুন তৈরি করা সেশন স্ট্রিং সরাসরি এখানে বসানো হলো
+session_str = "1BVtsOKlTRUuNTeIjxTjh0qxHSsh_nFe8VLnUB_uhdRsJBKlWa9acAbX0gYvb2cQhQMbs6HDEfMngX0rEpp2O0bd1UMtFDk1fx1dCTvO2k74T06A5K499QYWDxhQd4t28yYE-wwjFTfUUGPBRj8ABGR-0zKaCPKpJqfdJnlQHEU7zz59Frmwlgc7-AuH88FtN2kng0r_03vilFvjumc8I1Ynxxb_6yNoeMCQ784QLwtcpFv8Z0Q0CMR2-x8BQ8V1EdYmS2ZVnxGz_5u9o-ujIw0byLqyW-gQNL1jqQzQEDNrj0U-qYywcIEUG4ZmpOnRRswtUlMJ5rk06JAv9PjXkuN2E="
 
 async def main():
     try:
