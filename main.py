@@ -2,6 +2,7 @@ import asyncio
 import os
 from telethon import TelegramClient
 from telethon.tl.functions.account import UpdateStatusRequest
+from telethon.sessions import StringSession
 
 # Railway-র Environment Variables থেকে তথ্য নেবে
 api_id = int(os.environ.get("TELEGRAM_API_ID", 30291759))
@@ -29,5 +30,4 @@ async def main():
         await asyncio.sleep(45)
 
 if __name__ == '__main__':
-    from telethon.sessions import StringSession
     asyncio.run(main())
