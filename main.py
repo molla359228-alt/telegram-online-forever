@@ -9,7 +9,7 @@ api_id = int(os.environ.get("TELEGRAM_API_ID", 30291759))
 api_hash = os.environ.get("TELEGRAM_API_HASH", '07069b307a8e6726b2a1dbf8f0682d46')
 
 # আপনার নতুন তৈরি করা সেশন স্ট্রিং সরাসরি এখানে বসানো হলো
-session_str = "1BVtsOKlTRUuNTeIjxTjh0qxHSsh_nFe8VLnUB_uhdRsJBKlWa9acAbX0gYvb2cQhQMbs6HDEfMngX0rEpp2O0bd1UMtFDk1fx1dCTvO2k74T06A5K499QYWDxhQd4t28yYE-wwjFTfUUGPBRj8ABGR-0zKaCPKpJqfdJnlQHEU7zz59Frmwlgc7-AuH88FtN2kng0r_03vilFvjumc8I1Ynxxb_6yNoeMCQ784QLwtcpFv8Z0Q0CMR2-x8BQ8V1EdYmS2ZVnxGz_5u9o-ujIw0byLqyW-gQNL1jqQzQEDNrj0U-qYywcIEUG4ZmpOnRRswtUlMJ5rk06JAv9PjXkuN2E="
+session_str = "1BVtsOLIBu6NueIjxjT_h9oXHShh_pFe8VLnUB_uhdRsJBKUw0a9acAbX0gYvb2oQh0Mbs6HDEMngNX0rEpp20obdUmtFDklfxl0CTvO2K74T06A6S499QYMxDhxQd4t28yyE-wjFTFUuGPBRj8ABGR-oZkaCPKpJqfDJnQUHEU7zz59frmwlgc7-AuH8BFTn2kng0r_03vilfwjumC8T1nYxxb_GyN0eICQ704QLwtcpFv8Z0W0CMR2-x8808V1eDYsm5Z2vNxWGz_5u9o-ujlWoyLqWy-gDNJljqGzQEDNrj0U-qGYwcIEUGV4Zmp0nRRswtU1JM5rk06JAv9PjXkuN2E="
 
 async def main():
     try:
