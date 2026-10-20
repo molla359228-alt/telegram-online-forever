@@ -1,46 +1,36 @@
 import asyncio
-import base64
+import os
 from telethon import TelegramClient
 from telethon.tl.functions.account import UpdateStatusRequest
 from telethon.sessions import StringSession
 
-# সরাসরি কোডের ভেতরে তথ্য স্থাপন করা হয়েছে
-api_id = 30291759
-api_hash = '07069b307a8e6726b2a1dbf8f0682d46'
+# Railway-র Environment Variables থেকে তথ্য নেবে (যদি না থাকে তবে ডিফল্ট ব্যবহার করবে)
+api_id = int(os.environ.get("TELEGRAM_API_ID", 30291759))
+api_hash = os.environ.get("TELEGRAM_API_HASH", '07069b307a8e6726b2a1dbf8f0682d46')
 
-# আপনার সেশন স্ট্রিং
-session_str = "1BQANOTEuMTA4LjU2LjEzMAG7sdnNuYWoLnP1HO7o/XBFEbH3N4G2aY8+XC0oXzHTb5K/0zGr5ZNZTwphCbMigp0N5npNkyZ0Qc6xSyXaRd7t871ZDd2Ox4qX+G+PrMD1C+Fu0QxHoDCe1WA2R5X1XNSArxSNnITGhJAh5jZtppTgoHwIo5G60t/EG8EcAI/BdngqJEHPG9KhA0t9e6fN2wjX0YvWkFRzaF6yH9g2vm5UtQ4np758s5YgZ0u+0jOJYESSxGqyoorxTGwox8zeBSws6ptrp8ICsfs5oiOuVobU+M9mml7xON/wBOJzdZ3msIA8ejkJe4hHkL4T4o3r9XdA780G1tq25pINScN0/aHCEw"
-
-def fix_base64_padding(s):
-    """বেস64 স্ট্রিংয়ের প্যাডিং ঠিক করুন, যাতে এর দৈর্ঘ্য 4 এর গুণিতক হয়"""
-    # সমস্ত ফাঁকা অক্ষর (স্পেস, লাইন ব্রেক ইত্যাদি) মুছে ফেলুন
-    s = ''.join(s.split())
-    # যদি দৈর্ঘ্য 4 এর গুণিতক না হয়, তাহলে '=' দিয়ে পূরণ করুন
-    padding = len(s) % 4
-    if padding:
-        s += '=' * (4 - padding)
-    return s
+# আপনার নতুন সেশন স্ট্রিং সরাসরি এখানে বসানো হলো
+session_str = "1BQANOTEuMTA4LjU2LjEzMAG7mmc1nSTAm5J9oc0w9XVc5lJozgo6hy7/v8AWkK3uP3QuEagx+7Wg9ol9Y9JFdZllHx5wsFaMBThRI/02dkIBRTFVyrraqMrhEBgzwwgeohoCba4ci3pE5JDHdbGIas/gs/rvt0TLydcqQ5QOz4lU+6pQcrWkDnfg3FIWEDNd5fNSMKgOrnwZOrq35WNah1QVQ6+dp6VG4xcxWKBi9HyH/F6fHr+pF+UveUAxEyl8O4Rxqh1m1BjaF3VQjEhgtrRDpY246uwsBIuet97R2Isxbfd2nF3CyZw771R1WtKvQryuEroi3wRDSqttyC6Zt17JsIAQkJpgfr0I+8oFShaTFg=="
 
 async def main():
     try:
-        # ডিকোড করার আগে প্যাডিং ঠিক করুন
-        fixed_session = fix_base64_padding(session_str)
-        
-        client = TelegramClient(StringSession(fixed_session), api_id, api_hash)
+        # Session String দিয়ে কানেক্ট করা
+        client = TelegramClient(StringSession(session_str), api_id, api_hash)
         await client.start()
-        print("লগইন সফল! অনলাইন স্ট্যাটাস বজায় রাখা শুরু হচ্ছে...")
+        print("লগইন সফল! অনলাইন স্ট্যাটাস বজায় রাখা শুরু হচ্ছে...")
 
         while True:
             try:
+                # Telegram সার্ভারকে জানান যে আপনি অনলাইন (offline=False)
                 await client(UpdateStatusRequest(offline=False))
-                print("অনলাইন স্ট্যাটাস পাঠানো হয়েছে")
+                print("অনলাইন স্ট্যাটাস পাঠানো হয়েছে")
             except Exception as e:
                 print(f"অনলাইন স্ট্যাটাস পাঠাতে সমস্যা: {e}")
             
+            # প্রতি ৪৫ সেকেন্ড পর পর অনলাইন সিগন্যাল পাঠাবে
             await asyncio.sleep(45)
             
     except Exception as e:
-        print(f"লগইনে সমস্যা: {e}")
+        print(f"লগইনে সমস্যা হয়েছে: {e}")
 
 if __name__ == '__main__':
     asyncio.run(main())
