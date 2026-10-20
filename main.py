@@ -1,36 +1,17 @@
 import asyncio
-import os
-import re
 from telethon import TelegramClient
 from telethon.tl.functions.account import UpdateStatusRequest
 from telethon.sessions import StringSession
 
-# Railway-র Environment Variables থেকে তথ্য নেবে
-api_id = int(os.environ.get("TELEGRAM_API_ID", 30291759))
-api_hash = os.environ.get("TELEGRAM_API_HASH", '07069b307a8e6726b2a1dbf8f0682d46')
-raw_session = os.environ.get("TELEGRAM_SESSION_STRING", "")
+# সরাসরি কোডের ভেতরে তথ্য বসানো হলো
+api_id = 30291759
+api_hash = '07069b307a8e6726b2a1dbf8f0682d46'
 
-# স্ট্রিংয়ের ভেতরের অপ্রয়োজনীয় স্পেস বা নতুন লাইন মুছে ফেলার ফাংশন
-def clean_session(session):
-    if not session:
-        return None
-    # BEGIN, END এবং == চিহ্ন বাদ দেওয়া
-    session = session.replace("-----BEGIN STRING SESSION-----", "")
-    session = session.replace("-----END STRING SESSION-----", "")
-    session = session.replace("==", "")
-    # সব নতুন লাইন এবং স্পেস মুছে ফেলা
-    session = re.sub(r'\s+', '', session)
-    return session
-
-session_str = clean_session(raw_session)
+# আপনার সেশন স্ট্রিং (BEGIN, END এবং == ছাড়া শুধু মাঝের অংশ)
+session_str = "1BQANOTEuMTA4LjU2LjEzMAG7sdnNuYWoLnP1HO7o/XBFEbH3N4G2aY8+XC0oXzHTb5K/0zGr5ZNZTwphCbMigp0N5npNkyZ0Qc6xSyXaRd7t871ZDd2Ox4qX+G+PrMD1C+Fu0QxHoDCe1WA2R5X1XNSArxSNnITGhJAh5jZtppTgoHwIo5G60t/EG8EcAI/BdngqJEHPG9KhA0t9e6fN2wjX0YvWkFRzaF6yH9g2vm5UtQ4np758s5YgZ0u+0jOJYESSxGqyoorxTGwox8zeBSws6ptrp8ICsfs5oiOuVobU+M9mml7xON/wBOJzdZ3msIA8ejkJe4hHkL4T4o3r9XdA780G1tq25pINScN0/aHCEw"
 
 async def main():
-    if not session_str:
-        print("ত্রুটি: Railway-তে TELEGRAM_SESSION_STRING সেট করা নেই!")
-        return
-
     try:
-        # Session String দিয়ে কানেক্ট করা
         client = TelegramClient(StringSession(session_str), api_id, api_hash)
         await client.start()
         print("লগইন সফল! অনলাইন স্ট্যাটাস বজায় রাখা শুরু হচ্ছে...")
@@ -42,11 +23,10 @@ async def main():
             except Exception as e:
                 print(f"অনলাইন স্ট্যাটাস পাঠাতে সমস্যা: {e}")
             
-            # প্রতি ৪৫ সেকেন্ড পর পর অনলাইন সিগন্যাল পাঠাবে
             await asyncio.sleep(45)
             
     except Exception as e:
-        print(f"লগইনে সমস্যা হয়েছে, সেশনটি সঠিক নয়: {e}")
+        print(f"লগইনে সমস্যা: {e}")
 
 if __name__ == '__main__':
     asyncio.run(main())
